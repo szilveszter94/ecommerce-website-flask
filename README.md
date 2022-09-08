@@ -11,7 +11,7 @@ Using the sqlalchemy, the program manages the users, the products and the orders
 
 Automatically send email about the order summary after checkout
 
-
+------------------------------------------------------------------------------
 
 In this project i tryed to include all characteristics of a real ecommerce website.
 
