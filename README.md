@@ -18,3 +18,5 @@ In this project i tryed to include all characteristics of a real ecommerce websi
 If you want to use the online payment, and the email sending functions, you must
 
 have to give your own email smtp address, email password, and stripe api key for online payments.
+
+![Névtelen2](https://user-images.githubusercontent.com/95055034/189219286-508db789-bc20-4fc2-86e7-f09caec05c7b.png)
