@@ -1,0 +1,122 @@
+<!-- render the header -->
+{% include "header.html" %}
+
+        <div class="shop_sidebar_area">
+
+            <!-- ##### Single Widget ##### -->
+            <div class="widget catagory mb-50">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-30">Catagories</h6>
+
+                <!--  Catagories  -->
+                <div class="catagories-menu">
+                    <ul>
+                        <li><a href="{{ url_for('category', id='chairs') }}">Chairs</a></li>
+                        <li><a href="{{ url_for('category', id='beds') }}">Beds</a></li>
+                        <li><a href="{{ url_for('category', id='accessories') }}">Accesories</a></li>
+                        <li><a href="{{ url_for('category', id='furniture') }}">Furniture</a></li>
+                        <li><a href="{{ url_for('category', id='home_deco') }}">Home Deco</a></li>
+                        <li><a href="{{ url_for('category', id='dressings') }}">Dressings</a></li>
+                        <li><a href="{{ url_for('category', id='tables') }}">Tables</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ##### Single Widget ##### -->
+
+
+            <!-- ##### Single Widget ##### -->
+
+
+            <!-- ##### Single Widget ##### -->
+
+        </div>
+
+        <div class="amado_product_area section-padding-100">
+            <div class="container-fluid">
+
+
+
+                <div class="row">
+                    {% for i in products %}
+                    <!-- Single Product Area -->
+                    <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+                        <div class="single-product-wrapper">
+                            <!-- Product Image -->
+                            <div class="product-img">
+                                <a href="{{url_for('product_details', id=i.product_name)}}">
+                                <img src="{{ url_for('static', filename=i.img_url1) }}" alt="">
+                                <!-- Hover Thumb -->
+                                <img class="hover-img" src="{{ url_for('static', filename=i.img_url2) }}" alt="">
+                                    </a>
+                            </div>
+
+                            <!-- Product Description -->
+                            <div class="product-description d-flex align-items-center justify-content-between">
+                                <!-- Product Meta Data -->
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                    <p class="product-price">{{i.product_price}}</p>
+
+                                    <a href="{{url_for('product_details', id=i.id)}}">
+                                        <h6>{{i.product_name}}</h6>
+
+                                    </a>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <!-- Pagination -->
+                                            {% if current_user.is_authenticated and current_user.id == 1: %}
+                                            <nav aria-label="navigation">
+                                                <ul class="button-list">
+
+                                                    <li class="button-item"><a class="button delete-button" href="{{ url_for('delete', id=i.id)}}">Delete</a></li>
+                                                    <li class="button-item"><a class="button edit-button" href="{{ url_for('modify', id=i.id)}}">Edit</a></li>
+                                                    <li class="button-item"><a class="button add-button" href="{{ url_for('add', id=i.id)}}">Add</a></li>
+
+                                                </ul>
+                                            </nav>
+                                            {% elif current_user.is_authenticated and i.quantity > 0 %}
+                                            <nav aria-label="navigation">
+                                                <ul class="cart-btn">
+                                                    <li class="button-item"><a class="btn amado-btn w-100" href="{{ url_for('add_to_cart', id=i.id)}}">Add to cart</a></li>
+                                                </ul>
+                                            </nav>
+                                            {% elif current_user.is_authenticated and i.quantity == 0 %}
+                                            <nav aria-label="navigation">
+                                                <ul class="cart-btn">
+                                                    <li class="button-item"><a class="out_of_stock">Out of stock</a></li>
+                                                </ul>
+                                            </nav>
+                                            {% elif not current_user.is_authenticated and i.quantity > 0  %}
+                                            <nav aria-label="navigation">
+                                                <ul class="cart-btn">
+                                                    <li class="button-item"><a class="btn amado-btn w-100" href="{{ url_for('login_register')}}">Add to cart</a></li>
+                                                </ul>
+                                            </nav>
+                                            {% elif not current_user.is_authenticated and i.quantity == 0 %}
+                                            <nav aria-label="navigation">
+                                                <ul class="cart-btn">
+                                                    <li class="button-item"><a class="out_of_stock">Out Of Stock</a></li>
+                                                </ul>
+                                            </nav>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Ratings & Cart -->
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+
+    <!-- Render the footer -->
+    {% include "footer.html" %}

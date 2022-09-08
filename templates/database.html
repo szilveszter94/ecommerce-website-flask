@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Orders Data Table</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/jquery/jquery-2.2.4.min.js') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/popper.min.js') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+<div class="container-xxxl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="topnav">
+                    <a class="active" href="{{ url_for('home') }}">Home</a>
+                    <a class="active" href="{{ url_for('database') }}">All Orders</a>
+                    <a class="active" href="{{ url_for('user_management') }}">User Manager</a>
+  <div class="search-container">
+      {% if um == True %}
+    <form action="{{url_for('user_management')}}" method="post">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+      {% else %}
+      <form action="{{url_for('database')}}" method="post">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+      {% endif %}
+  </div>
+</div>
+
+            </div>
+            {% if um == True %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>E-mail</th>
+                        <th>Phone No</th>
+                        <th>City</th>
+                        <th>Street Address</th>
+                        <th>ZIP Code</th>
+                        <th>Company</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- Show all users -->
+                {% for i in users %}
+                    <tr>
+                        <td>{{i.profile_id}}</td>
+                        <td>{{i.first_name}}</td>
+                        <td>{{i.last_name}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.phone_number}}</td>
+                        <td>{{i.city}}</td>
+                        <td>{{i.address}}</td>
+                        <td>{{i.zip_code}}</td>
+                        <td>{{i.company}}</td>
+                        <td>
+                            <a href="{{url_for('delete_user', id=i.profile_id)}}"><i class="fa fa-trash-o" style='font-size:20px; color: #630606' aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% else %}
+            </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Order Nr.</th>
+                        <th>E-mail</th>
+                        <th>Phone No</th>
+                        <th>City</th>
+                        <th>Street Address</th>
+                        <th>ZIP Code</th>
+                        <th>Payment</th>
+                        <th>Price</th>
+                        <th>Products</th>
+                        <th>Company</th>
+                        <th>Comment</th>
+                        <th>Date</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- Show all orders -->
+                {% for i in orders %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.first_name}}</td>
+                        <td>{{i.last_name}}</td>
+                        <td>{{i.order_number}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.city}}</td>
+                        <td>{{i.phone_number}}</td>
+                        <td>{{i.street_address}}</td>
+                        <td>{{i.zip_code}}</td>
+                        <td>{{i.payment}}</td>
+                        <td>{{i.price}}</td>
+                        <td>{{i.products_in_cart}}</td>
+                        <td>{{i.company}}</td>
+                        <td>{{i.comment}}</td>
+                        <td>{{i.date}}</td>
+                        <td>
+                            <a href="{{url_for('delete_order', id=i.id)}}"><i class="fa fa-trash-o" style='font-size:20px; color: #630606' aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>     
+</body>
+</html>

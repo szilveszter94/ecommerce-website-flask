@@ -1,0 +1,46 @@
+{% include "header.html" %}
+
+        <!-- Product Catagories Area Start -->
+        <div class="products-catagories-area clearfix">
+            <div class="amado-pro-catagory clearfix">
+                <br>
+                {% if length <= 9 %}
+                {% for i in all_products %}
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{{url_for('product_details', id=i.product_name)}}">
+                        <img src="{{ url_for('static', filename=i.img_url1) }}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From {{i.product_price}}</p>
+                            <h6>{{i.product_name}}</h6>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+                {% else %}
+                {% for i in random_products %}
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{{url_for('product_details', id=i.product_name)}}">
+                        <img src="{{ url_for('static', filename=i.img_url1) }}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From {{i.product_price}}</p>
+                            <h6>{{i.product_name}}</h6>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <!-- Product Catagories Area End -->
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+
+
+{% include "footer.html" %}

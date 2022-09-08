@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Checkout canceled</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+   <!--  Render the cancel page  -->
+<body>
+  <section>
+    <div class="jumbotron text-center">
+  <h1 class="display-3">Checkout canceled</h1>
+  <p class="lead"><strong>Please check your credit card</strong> and try again. Your order is canceled.</p>
+  <hr>
+  <p>
+    Having trouble? <a href="email@email.com">Contact us</a>
+  </p>
+  <p class="lead">
+    <a class="btn btn-primary btn-sm" href="{{url_for('home')}}" role="button">Continue to homepage</a>
+  </p>
+</div>
+  </section>
+</body>
+</html>

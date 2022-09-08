@@ -1,0 +1,6 @@
+stripe~=2.67.0
+pdfkit~=1.0.0
+Flask~=2.0.3
+SQLAlchemy~=1.4.32
+Werkzeug~=2.0.3
+WTForms~=3.0.1

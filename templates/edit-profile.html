@@ -1,0 +1,60 @@
+{% include "header.html" %}
+
+        <div class="cart-table-area section-padding-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="checkout_details_area mt-50 clearfix">
+
+                            <div class="cart-title">
+                                <h2>Edit Profile</h2>
+
+                            </div>
+
+                            <form action="{{url_for('edit_profile')}}" method="post">
+                                <div class="row">
+
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" name="first_name" id="first_name" value="" placeholder="First Name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" name="last_name" id="last_name" value="" placeholder="Last Name" required>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" name="company" id="company" placeholder="Company Name" value="">
+                                    </div>
+                                    <div class="col-12 mb-3" style="font-size:14px;" >
+                                        <select class="w-100" name="country"  id="country">
+                                        <option name="country" value="Hungary">Hungary</option>
+                                    </select>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control mb-3" name="street_address" id="street_address" placeholder="Address" required value="">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" name="city" id="city" placeholder="City" required value="">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="Zip Code" required value="">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="number" class="form-control" name="phone_number" id="phone_number" placeholder="Phone No" required value="">
+                                    </div>
+
+                                    <div class="col-12 mb-3" style="font-size:18px;">
+                                    <input type="submit" class="btn amado-btn w-50" value="Confirm">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+
+
+    {% include "footer.html" %}

@@ -1,0 +1,106 @@
+<!-- Render header -->
+{% include "header.html" %}
+
+        <!-- Product Details Area Start -->
+        <div class="single-product-area section-padding-100 clearfix">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-50">
+                                <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url_for('category', id=product.category) }}">{{product.category}}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{product.product_name}}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-7">
+                        <div class="single_product_thumb">
+                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url({{ url_for('static', filename=product.img_url1) }});">
+                                    </li>
+                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url({{ url_for('static', filename=product.img_url2) }});">
+                                    </li>
+                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url({{ url_for('static', filename=product.img_url3) }});">
+                                    </li>
+                                    <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url({{ url_for('static', filename=product.img_url4) }});">
+                                    </li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <a class="gallery_img" href="{{ url_for('static', filename=product.img_url1) }}">
+                                            <img class="d-block w-100" src="{{ url_for('static', filename=product.img_url1) }}" alt="First slide">
+                                        </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a class="gallery_img" href="{{ url_for('static', filename=product.img_url2) }}">
+                                            <img class="d-block w-100" src="{{ url_for('static', filename=product.img_url2) }}" alt="Second slide">
+                                        </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a class="gallery_img" href="{{ url_for('static', filename=product.img_url3) }}">
+                                            <img class="d-block w-100" src="{{ url_for('static', filename=product.img_url3) }}" alt="Third slide">
+                                        </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a class="gallery_img" href="{{ url_for('static', filename=product.img_url4) }}">
+                                            <img class="d-block w-100" src="{{ url_for('static', filename=product.img_url4) }}" alt="Fourth slide">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <div class="single_product_desc">
+                            <!-- Product Meta Data -->
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <p class="product-price">$180</p>
+                                <a href="{{url_for('product_details', id=product.id)}}">
+                                    <h6>{{product.product_name}}</h6>
+                                </a>
+                                <!-- Ratings & Review -->
+                                <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                                    <div class="review">
+                                        <a href="#">Write A Review</a>
+                                    </div>
+                                </div>
+                                <!-- Avaiable -->
+                                {% if product.quantity > 0 %}
+                                <p class="avaibility"><i class="fa fa-circle"></i> {{product.quantity}} Left In Stock</p>
+                                {% else %}
+                                <p class="avaibility"><i class="fa fa-circle" style="color: #890F0D"></i> Out Of Stock</p>
+                                {% endif %}
+                            </div>
+
+                            <div class="short_overview my-5">
+                                <p>{{product.description}}</p>
+                            </div>
+
+                            <!-- Add to Cart Form -->
+                            <form class="cart clearfix" method="post">
+                                {% if product.quantity > 0: %}
+                                <a class="btn amado-btn w-100" href="{{ url_for('add_to_cart', id=product.id)}}">Add to cart</a>
+                                {% else %}
+                                <button disabled class="out_of_stock">Out Of Stock</button>
+                                {% endif %}
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Details Area End -->
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+
+    <!-- Render the footer -->
+    {% include "footer.html" %}

@@ -1,0 +1,35 @@
+<!-- import Flask Bootstrap -->
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+<!-- import custom styles -->
+{% block styles %}
+  {{ super() }}
+    <link rel="icon" href="static/img/core-img/favicon.ico">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/core-style.css') }}">
+{% endblock %}
+
+{% block title %}
+Edit product
+{% endblock %}
+
+{% block content %}
+<div class="container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="login_area mt-50">
+                            <div class="amado-navbar-brand">
+                <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='img/core-img/logo.png') }}" alt=""></a>
+            </div>
+                            <br>
+                            <h2 class="login_area mt-50">Please Login or Register first before you start shopping.</h2>
+                            <br>
+                            <!-- Show login or register form -->
+                            <h1 class="login-title">Login/Register</h1>
+                                {{ wtf.quick_form(form, id="quick_form", novalidate=True, button_map={'submit': 'primary'}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

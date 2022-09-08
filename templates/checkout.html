@@ -1,0 +1,147 @@
+ <!--  Render the header  -->
+{% include "header.html" %}
+
+        <div class="cart-table-area section-padding-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="checkout_details_area mt-50 clearfix">
+
+                            <div class="cart-title">
+                                <h2>Checkout</h2>
+                                 <!--  Render all error messages  -->
+                                 {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+           <p style="font-size: 18px;" class="red-message">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+                            </div>
+                             <!--  Render the checkout form  -->
+                            <form action="{{url_for('checkout')}}" method="post">
+                                <div class="row">
+                                    {% if current_user.is_authenticated %}
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" name="first_name" id="first_name" value="{{address.first_name}}" placeholder="First Name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" name="last_name" id="last_name" value="{{address.last_name}}" placeholder="Last Name" required>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" name="company" id="company" placeholder="Company Name" value="{{address.company_name}}">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" required value="{{address.email}}">
+                                    </div>
+                                    <div class="col-12 mb-3" style="font-size:14px;" >
+                                        <select class="w-100" name="country"  id="country">
+                                        <option name="country" value="Hungary">Hungary</option>
+                                    </select>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control mb-3" name="street_address" id="street_address" placeholder="Address" required value="{{address.address}}">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" name="city" id="city" placeholder="City" required value="{{address.city}}">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="Zip Code" required value="{{address.zip_code}}">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="number" class="form-control" name="phone_number" id="phone_number" placeholder="Phone No" required value="{{address.phone_number}}">
+                                    </div>
+
+                                    <div class="col-12 mb-3" style="font-size:18px;">
+                                        <select  class="w-100 select-style" name="payment" id="payment">
+                                            <option name="payment" value="PayPal or CreditCard">&#xf1f4; PayPal or CreditCard </option>
+                                            <option name="payment" value="Cash on Delivery">&#xf155; Cash on Delivery</option>
+                                    </select>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <textarea name="comment" class="form-control w-100" id="comment" cols="30" rows="10" placeholder="Leave a comment about your order"></textarea>
+                                    </div>
+                                    <div class="cart-btn">
+                                        {% else %}
+                                        <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" name="first_name" id="first_name" value="" placeholder="First Name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" name="last_name" id="last_name" value="" placeholder="Last Name" required>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" name="company" id="company" placeholder="Company Name" value="">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" required value="">
+                                    </div>
+                                    <div class="col-12 mb-3" style="font-size:14px;" >
+                                        <select class="w-100" name="country"  id="country">
+                                        <option name="country" value="Hungary">Hungary</option>
+                                    </select>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control mb-3" name="street_address" id="street_address" placeholder="Address" required value="">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" name="city" id="city" placeholder="City" required value="">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="Zip Code" required value="">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="number" class="form-control" name="phone_number" id="phone_number" placeholder="Phone No" required value="">
+                                    </div>
+
+                                    <div class="col-12 mb-3" style="font-size:18px;">
+                                        <select  class="w-100 select-style" name="payment" id="payment">
+                                            <option name="payment" value="PayPal or CreditCard">&#xf1f4; PayPal or CreditCard </option>
+                                            <option name="payment" value="Cash on Delivery">&#xf155; Cash on Delivery</option>
+                                    </select>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <textarea name="comment" class="form-control w-100" id="comment" cols="30" rows="10" placeholder="Leave a comment about your order"></textarea>
+                                    </div>
+                                    <div class="cart-btn">
+                                        {% endif %}
+                                         <!--  Check the price and render purchase button  -->
+                                {% if current_user.is_authenticated and price > 0 %}
+                                <input type="submit" class="btn amado-btn w-100" value="Purchase">
+                                {% else %}
+                                <a href="" type="submit" class="btn amado-btn w-100">Purchase</a>
+                                {% endif %}
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="cart-summary">
+                             <!--  Render the price of the products in cart  -->
+                            <h5>Cart Total</h5>
+                            <ul class="summary-table">
+                                {% if current_user.is_authenticated %}
+                                <li><span>subtotal:</span> <span>${{price}}</span></li>
+                                <li><span>delivery:</span> <span>Free</span></li>
+                                <li><span>total:</span> <span>${{price}}</span></li>
+                                {% else %}
+                                <li><span>subtotal:</span> <span>$0.00</span></li>
+                                <li><span>delivery:</span> <span>Free</span></li>
+                                <li><span>total:</span> <span>$0.00</span></li>
+                                {% endif %}
+                            </ul>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+     <!--  Render the footer  -->
+    {% include "footer.html" %}

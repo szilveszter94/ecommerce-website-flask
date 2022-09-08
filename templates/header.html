@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Amado - Furniture Ecommerce Template | Home</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="{{ url_for('static', filename='img/core-img/favicon.ico') }}">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/core-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet"/>
+
+
+</head>
+
+<body>
+    <!-- Search Wrapper Area Start -->
+    <div class="search-wrapper section-padding-100">
+        <div class="search-close">
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="search-content">
+                        <form action="#" method="get">
+                            <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                            <button type="submit"><img src="{{ url_for('static', filename='img/core-img/search.png') }}" alt=""></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search Wrapper Area End -->
+
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
+
+        <!-- Mobile Nav (max width 767px)-->
+        <div class="mobile-nav">
+            <!-- Navbar Brand -->
+            <div class="amado-navbar-brand">
+                <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='img/core-img/logo.png') }}" alt=""></a>
+            </div>
+            <!-- Navbar Toggler -->
+            <div class="amado-navbar-toggler">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Header Area Start -->
+        <header class="header-area clearfix">
+            <!-- Close Icon -->
+            <div class="nav-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+            <!-- Logo -->
+            <div class="logo">
+                <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='img/core-img/logo.png') }}" alt=""></a>
+            </div>
+            <!-- Amado Nav -->
+            <nav class="amado-nav">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('shop') }}">Shop</a></li>
+                    {% if current_user.is_authenticated: %}
+                    <li><a href="{{ url_for('user_cart', id=current_user.id) }}">Cart</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('cart') }}">Cart</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('checkout') }}">Checkout</a></li>
+                     {% if current_user.is_authenticated and current_user.id == 1: %}
+                    <li><a href="{{ url_for('add') }}">Add new product</a></li>
+                    <li><a href="{{ url_for('database') }}">Database</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <!-- Button Group -->
+            <div class="cart-fav-search mb-50">
+                {% if not current_user.is_authenticated: %}
+                <a id="login-element" href="{{ url_for('login_register') }}"> <img src="{{ url_for('static', filename='img/core-img/user.png') }}" alt="" width="45"
+                            height="45"> Login</a>
+                {% endif %}
+                {% if current_user.is_authenticated: %}
+                <a id="login-element2" href="{{ url_for('user_cart', id=current_user.id) }}"> <img src="{{ url_for('static', filename='img/core-img/shopping-cart.png') }}" alt="" width="45"
+                            height="45"> Cart <span>({{products_in_cart}})</span></a>
+                <a id="login-element1" href="{{ url_for('profile') }}"> <img src="{{ url_for('static', filename='img/core-img/user.png') }}" alt="" width="45"
+                            height="45"> Profile</a>
+                <a id="login-element1" href="{{ url_for('logout') }}"> <img src="{{ url_for('static', filename='img/core-img/logout.png') }}" alt="" width="45"
+                            height="45"> Logut</a>
+                {% else %}
+                <a id="login-element2" href="{{ url_for('cart') }}"> <img src="{{ url_for('static', filename='img/core-img/shopping-cart.png') }}" alt="" width="45"
+                            height="45"> Cart <span>(0)</span></a>
+                {% endif %}
+            </div>
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-50">
+                <a href="#" class="fav-nav"><img src="{{ url_for('static', filename='img/core-img/favorites.png') }}" alt=""> Favourite</a>
+                <a href="#" class="search-nav"><img src="{{ url_for('static', filename='img/core-img/search.png') }}" alt=""> Search</a>
+            </div>
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+        </header>
+        <!-- Header Area End -->

@@ -1,0 +1,160 @@
+<!-- Render the header -->
+{% include "header.html" %}
+
+    <!-- Show the user profile -->
+<div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="{{ url_for('static', filename='img/core-img/profile.png')}}" alt=""/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        Your Profile Page
+                                    </h5>
+                                    <h5>
+                                        Personal Data & Address
+                                    </h5>
+                            <br>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                {% if not user_orders %}
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Address</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="{{ url_for('edit_profile') }}">
+                            <input class="btn amado-btn w-50" name="btnAddMore" value="Edit Profile"/>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+                            <p>Menu</p>
+                            <a href="{{ url_for('profile') }}">Profile</a><br/>
+                            <a href="{{ url_for('user_orders') }}">My Orders</a><br/>
+                            <a href="{{ url_for('logout') }}">Logout</a>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        {% if user_orders: %}
+                                    <table class="responsive-table table">
+                                        <thead>
+                                            <tr>
+                                              <th>Order Number</th>
+                                              <th>Date</th>
+                                              <th>Price</th>
+                                              <th>Products</th>
+                                            </tr>
+                                          </thead>
+                                        <tbody>
+                                        {% for i in order %}
+                                            <tr>
+                                              <td>{{i.order_number}}</td>
+                                              <td>{{i.date}}</td>
+                                              <td>${{i.price}}</td>
+                                              <td>{{i.products_in_cart}}</td>
+                                            </tr>
+                                        {% endfor %}
+                                          </tbody>
+                                        </table>
+
+                                        {% else %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>First Name:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>{{profile_details.first_name}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Last Name:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>{{profile_details.last_name}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>{{profile_details.email}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Phone:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>{{profile_details.phone_number}}</label>
+                                            </div>
+                                        </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Country:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>{{profile_details.country}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Company Name:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>{{profile_details.company_name}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>City:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>{{profile_details.city}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>ZIP Code:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>{{profile_details.zip_code}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Street Address:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>{{profile_details.address}}</label>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>
+<!-- Render the footer -->
+{% include "footer.html" %}
